@@ -1,20 +1,20 @@
 /*
 
-1)Given a BST ,Find its Maximum Height 
+1)Given a BST ,Find its Maximum Height
 
 Height of a NULL BST is 0
 
 Height of a BST which has only one node is 1
 
-Ex Input : 
+Ex Input :
 
-    10 
-    /\
-   5 80
-  /  /
- 2  50
-  \
-   4
+10
+/\
+5 80
+/  /
+2  50
+\
+4
 
 Height of above Tree is 4
 
@@ -39,18 +39,39 @@ struct node{
 	int data;
 	struct node *right;
 };
-
-
+int max_depth(int, int);
+int get_sum(struct node *);
 int get_height(struct node *root){
-
-	return 0;
+	if (root == NULL)
+		return 0;
+	else
+	{
+		return max_depth(get_height(root->left), get_height(root->right)) + 1;
+	}
 }
-
+int max_depth(int a, int b)
+{
+	if (a > b)
+		return a;
+	else
+		return b;
+}
 int get_left_subtree_sum(struct node *root){
-	return 0;
+	if (root == NULL)
+		return 0;
+	return get_sum(root->left);
 }
 
 int get_right_subtree_sum(struct node *root){
-	return 0;
+	if (root == NULL)
+		return 0;
+	return get_sum(root->right);
 }
 
+int get_sum(struct node *root)
+{
+	if (root == NULL)
+		return 0;
+	else
+		return root->data + get_sum(root->left) + get_sum(root->right);
+}
